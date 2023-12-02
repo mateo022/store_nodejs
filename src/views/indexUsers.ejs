@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <title>Products SA</title>
+</head>
+<body>
+    <header class="header bg-warning">
+        <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-3">
+                    <h1>Products SA</h1>
+                </div>
+                <form class="col-md-4 form-inline" action="/indexUsers" method="GET">
+                  <input class="form-control mr-sm-2" type="search" name="query" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Search</button>
+                </form>
+                <div class="col-md-2">
+                  <% if (!user) { %>
+                    <a href="./auth/signIn" class="btn btn-dark mt-2">Iniciar Sesion</a>
+                  <% } %>
+                </div>
+                <div class="col-md-2">
+                  <% if (user) { %>
+                      <a href="/auth/signOut" class="btn btn-dark mt-2">Cerrar sesión</a>
+                  <% } %>
+              </div>
+            </div>
+    </header>
+    <!-- Carrusel -->
+    <div id="carouselExample" class="carousel slide">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="/imgs/banner2.png" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="/imgs/banner1.png" class="d-block w-100" alt="...">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+      <br><br>
+      <!-- Productos -->
+      <h1 class="text-center text-warning"> Productos </h1>
+      <br>
+      <div class="container">
+        <div class="row">
+        <% products.map((products) =>{%>
+        <div class="col-md-3 mb-4">
+            <div class="card h-100 border-warning border-3 p-3">
+                <img src="/imgs/<%= products.product_image %>" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title"><%= products.product_name %></h5>
+                  <p class="card-text"><%= products.product_description %></p>
+                  <p class="card-text"><%= products.product_size %></p>
+                  <p class="card-text">$<%= products.product_price %></p>
+                  <% if (!user) { %>
+                    <a href="/auth/signUp" class="btn btn-warning buy-now">Comprar ahora</a>
+                  <% } else { %>
+                  <a href="/formOrder?product_id=<%= products.product_id %>&product_name=<%= products.product_name %>&product_price=<%= products.product_price %>" class="btn btn-warning buy-now">Comprar ahora</a>
+                  <% } %>
+                </div>
+              </div>
+        </div>
+        <% }) %>
+      </div>
+  </div>
+</body>
+<footer class="footer bg-warning">
+  <div class="row">
+    <span class="text-center h6 p-2">Copyrigth - Sebastian Arias</span>        
+  </div>
+</footer>
+</html>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>

@@ -1,0 +1,33 @@
+{
+  "name": "Parcial_1",
+  "version": "1.0.0",
+  "description": "Express-App",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node app.js",
+    "debug": "npx nodemon app.js"
+  },
+  "keywords": [
+    "express",
+    "ejs"
+  ],
+  "author": "Mateo Ceballos",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.3",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0",
+    "pg": "^8.10.0",
+    "pg-hstore": "^2.3.4",
+    "postgres": "^3.3.4",
+    "sequelize": "^6.31.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}

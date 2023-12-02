@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Create new Order</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
+  </head>
+  <body>
+    <h1 class="alert alert-success">Create new Order</h1>
+    <div class="row">
+      <div class="col-md-2"></div>
+          <div class="col-md-8">
+              <!-- Formulario -->
+              <form method="POST" action="/admin/orders/store">
+                <div class="mb-3">
+                  <label for="order_name" class="form-label">Nombre</label>
+                  <input name="order_name" type="text" class="form-control" id="order_name">
+                </div>
+                <div class="mb-3">
+                  <label for="order_last_name" class="form-label">Apellidos</label>
+                  <input name="order_last_name" type="text" class="form-control" id="order_last_name">
+                </div>
+                <div class="mb-3">
+                    <label for="order_email" class="form-label">Correo Electronico</label>
+                    <input name="order_email" type="text" class="form-control" id="order_email">
+                  </div>
+                  <div class="mb-3">
+                    <label for="order_address" class="form-label">Dirección de vivienda</label>
+                    <input name="order_address" type="text" class="form-control" id="order_address">
+                  </div>
+                  <div class="mb-3">
+                    <label for="order_date" class="form-label">Fecha de pedido</label>
+                    <input type="date" name="order_date" class="form-control" id="order_date">
+                  </div>
+                  <div class="mb-3">
+                    <label for="product_id">Seleccione un producto</label>
+                    <select name="product_id" id="product_id" onchange="updatePrice()">
+                      <option value="null">Seleccione una opcion</option>
+                      <% products.map( (product) =>{%>
+                      <option value="<%=product.product_id%>" data-price="<%= product.product_price %>"><%=product.product_name%></option>
+                      <% }) %>
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label for="product_price" class="form-label">Precio</label>
+                    <input type="number" name="product_price" class="form-control" id="product_price" disabled>
+                  </div>
+                  
+                    <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+          </div>
+      <div class="col-md-2"></div>
+  </div>
+  </body>
+</html>
+
+<script>
+  function updatePrice() {
+    const select = document.getElementById('product_id');
+    const priceInput = document.getElementById('product_price');
+    const selectedOption = select.options[select.selectedIndex];
+    const price = selectedOption.dataset.price;
+    priceInput.value = price;
+  }
+</script>
+<!-- <script>
+  function updatePrice() {
+    const select = document.getElementById('product_id');
+    const priceHiddenInput = document.getElementById('product_price_hidden');
+    const selectedOption = select.options[select.selectedIndex];
+    const price = selectedOption.dataset.price;
+    priceHiddenInput.value = price;
+  }
+</script> -->
